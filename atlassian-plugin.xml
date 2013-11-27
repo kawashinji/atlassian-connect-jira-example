@@ -79,9 +79,15 @@
     * [JIRA](https://developer.atlassian.com/static/connect#jira)
     * [Confluence](https://developer.atlassian.com/static/connect#confluence)
    -->
-  <general-page key="hello-world-page-in-jira" name="Hello World" section="system.top.navigation.bar" url="/hello-world">
+  <general-page key="anonymous-hello-world-page" name="Hello World (Anonymous)" section="system.top.navigation.bar" url="/hello-world">
     <conditions>
-        <condition url="/conditions/hello-world"/>
+        <condition name="user_is_logged_in" invert="true"/>
+    </conditions>
+  </general-page>
+
+  <general-page key="hello-world-page" name="Hello World (Logged In)" section="system.top.navigation.bar" url="/hello-world">
+    <conditions>
+        <condition name="user_is_logged_in" />
     </conditions>
   </general-page>
 
