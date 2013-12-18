@@ -1,6 +1,6 @@
 {
-    "baseUrl": "http://localhost:3000",
-    "key": "atlassian-connect-jira-addon-jwt",
+    "baseUrl": "{{localBaseUrl}}",
+    "key": "atlassian-connect-jira-addon",
     "description": "Add-on which demonstrates usage of Atlassian Connect in JIRA",
     "name": "Example Connect JIRA Add-on",
     "vendor": {
@@ -8,68 +8,78 @@
         "url": "http://www.atlassian.com/"
     },
     "authentication": {
-        "type": "jwt",
+        "type": "jwt"
     },
     "lifecycle": {
         "installed": "/installed"
     },
     "modules": {
-        "webItems": [{
-            "name": {
-                "value": "Remote web item"
+        "webItems": [
+            {
+                "name": {
+                    "value": "Remote web item"
+                },
+                "context": "addon",
+                "location": "system.top.navigation.bar",
+                "link": "/hello-world",
+                "tooltip": {
+                    "value": "My JIRA Connect Add-on",
+                    "i18n": "foo.bar"
+                }
             },
-            "context": "addon",
-            "location": "system.top.navigation.bar",
-            "link": "/hello-world",
-            "tooltip": {
-                "value": "My JIRA Connect Add-on",
-                "i18n": "foo.bar"
+            {
+                "name": {
+                    "value": "Dialog web item"
+                },
+                "context": "addon",
+                "location": "system.top.navigation.bar",
+                "link": "/hello-world",
+                "target": {
+                    "type": "dialog"
+                },
+                "tooltip": {
+                    "value": "Web item that loads a dialog",
+                    "i18n": "foo.bar"
+                }
+            },
+            {
+                "name": {
+                    "value": "Inline Dialog web item"
+                },
+                "context": "addon",
+                "location": "system.top.navigation.bar",
+                "link": "/hello-world",
+                "target": {
+                    "type": "inlinedialog"
+                },
+                "tooltip": {
+                    "value": "Web item that loads an inline dialog",
+                    "i18n": "foo.bar"
+                }
             }
-        }, {
-            "name": {
-                "value": "Dialog web item"
-            },
-            "context": "addon",
-            "location": "system.top.navigation.bar",
-            "link": "/hello-world",
-            "target": {
-                "type": "dialog"
-            },
-            "tooltip": {
-                "value": "Web item that loads a dialog",
-                "i18n": "foo.bar"
+        ],
+        "webPanels": [
+            {
+                "name": {
+                    "value": "Project Banner"
+                },
+                "location": "atl.jira.view.issue.right.context",
+                "url": "/hello-world"
             }
-        }, {
-            "name": {
-                "value": "Inline Dialog web item"
-            },
-            "context": "addon",
-            "location": "system.top.navigation.bar",
-            "link": "/hello-world",
-            "target": {
-                "type": "inlinedialog"
-            },
-            "tooltip": {
-                "value": "Web item that loads an inline dialog",
-                "i18n": "foo.bar"
+        ],
+        "generalPages": [
+            {
+                "location": "system.top.navigation.bar",
+                "name": {
+                    "value": "Hello World"
+                },
+                "url": "/hello-world",
+                "conditions": [
+                    {
+                        "condition": "/conditions/hello-world"
+                    }
+                ]
             }
-        }],
-        "webPanels": [{
-            "name": {
-                "value": "Project Banner"
-            },
-            "location": "atl.jira.view.issue.right.context",
-            "url": "/hello-world"
-        }],
-        "generalPages": [{
-            "location": "system.top.navigation.bar",
-            "name": {
-                "value": "Hello World"
-            },
-            "url": "/hello-world"
-            // <conditions>
-            //     <condition url="/conditions/hello-world"/>
-            // </conditions>
-        }]
+        ]
     }
 }
