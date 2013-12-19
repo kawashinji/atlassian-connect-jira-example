@@ -10,12 +10,12 @@ module.exports = function (app, addon) {
       res.format({
         // If the request content-type is text-html, it will decide which to serve up
         'text/html': function () {
-          res.redirect(addon.descriptor.documentationUrl() || '/atlassian-plugin.xml');
+          res.redirect('/atlassian-connect.json');
         },
         // This logic is here to make sure that the `atlassian-plugin.xml` is always
         // served up when requested by the host
         'application/xml': function () {
-          res.redirect('/atlassian-plugin.xml');
+          res.redirect('/atlassian-connect.json');
         }
       });
     }
