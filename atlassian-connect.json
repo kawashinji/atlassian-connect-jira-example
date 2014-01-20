@@ -7,6 +7,7 @@
         "name": "Atlassian",
         "url": "http://www.atlassian.com/"
     },
+    "enableLicensing": true,
     "authentication": {
         "type": "jwt"
     },
@@ -21,7 +22,7 @@
                 },
                 "context": "addon",
                 "location": "system.top.navigation.bar",
-                "link": "/hello-world",
+                "url": "/hello-world",
                 "tooltip": {
                     "value": "My JIRA Connect Add-on",
                     "i18n": "foo.bar"
@@ -33,7 +34,7 @@
                 },
                 "context": "addon",
                 "location": "system.top.navigation.bar",
-                "link": "/hello-world",
+                "url": "/hello-world",
                 "target": {
                     "type": "dialog"
                 },
@@ -48,7 +49,7 @@
                 },
                 "context": "addon",
                 "location": "system.top.navigation.bar",
-                "link": "/hello-world",
+                "url": "/hello-world",
                 "target": {
                     "type": "inlinedialog"
                 },
@@ -71,7 +72,7 @@
             {
                 "location": "system.top.navigation.bar",
                 "name": {
-                    "value": "Hello World"
+                    "value": "Hello World Webitem"
                 },
                 "url": "/hello-world",
                 "conditions": [
@@ -80,6 +81,21 @@
                     }
                 ]
             }
-        ]
+        ],
+        "adminPages": [
+            {
+                "name": {
+                    "value": "Config Admin Page"
+                },
+                "url": "/hello-world"
+            }
+        ],
+        "configurePage": {
+            "name": { 
+                "value": "Add-on Configuration"
+            },
+            "url": "/configure",
+            "location": "system.admin/globalsettings"
+        }
     }
 }

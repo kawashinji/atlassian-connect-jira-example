@@ -1,20 +1,11 @@
-module.exports = function (app, addon) {
-
-  // Root route. This route will serve the `atlassian-plugin.xml` unless the
-  // plugin-info>param[documentation.url] inside `atlassian-plugin.xml` is set... else
-  // it will redirect to that documentation URL
-  app.get('/',
-
-    function(req, res) {
-      // Use content-type negotiation to choose the best way to respond
+module.exports = function(app, addon) {
+  
+  app.get('/', function(req, res) {
       res.format({
-        // If the request content-type is text-html, it will decide which to serve up
-        'text/html': function () {
+        'text/html': function() {
           res.redirect('/atlassian-connect.json');
         },
-        // This logic is here to make sure that the `atlassian-plugin.xml` is always
-        // served up when requested by the host
-        'application/xml': function () {
+        'application/json': function() {
           res.redirect('/atlassian-connect.json');
         }
       });
@@ -22,46 +13,62 @@ module.exports = function (app, addon) {
 
   );
 
-  // This is an example route that's used by the default <general-page> modules
-  app.get('/hello-world',
+  app.get('/hello-world', addon.authenticate(), function(req, res) {
+    res.render('hello-world', {
+      title: 'Atlassian Connect'
+    });
+  });
 
-    // Require authentication with Atlassian Connect's OAuth signing
-    addon.authenticate(),
+  app.get('/configure', addon.authenticate(), function(req, res) {
+    res.render('configure', {
+      title: 'Atlassian Connect'
+    });
+  });
 
-    function(req, res) {
-      // Rendering a template is easy; the `render()` takes two params: name of template
-      // and a json object to pass the context in
-      res.render('hello-world', {title: 'Atlassian Connect'});
-    }
-  );
+  app.get('/conditions/hello-world', addon.authenticate(), function(req, res) {
+    //console.log(req);
+    //console.log("HEADERS", req.headers);
+    res.render('conditions/hello-world', {
+      shouldDisplay: true
+    });
+  });
 
-  app.get('/conditions/hello-world',
-      addon.authenticate(),
-      function (req, res) {
-          //console.log(req);
-          //console.log("HEADERS", req.headers);
-          res.render('conditions/hello-world', {
-              shouldDisplay: true
-          });
+  app.get('/profile', addon.authenticate(), function(req, res) {
+    res.render('profile', {
+      profileKey: req.param('profileKey')
+    });
+  });
+
+  app.get('/search-view', addon.authenticate(), function(req, res) {
+    res.render('search-view', {
+
+    });
+  });
+
+  app.get('/license', function(req, res) {
+      var httpClient = addon.httpClient({
+          clientKey: 'jira:15489595',
+          userId: "admin",
+          appKey: addon.key
+      });
+
+      httpClient.get({
+          "headers": {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          },
+          "url": "/rest/atlassian-connect/latest/license"
+      },
+      function(err, response, body) {
+          if (err) { 
+            console.log(response.statusCode + ": " + err);
+            res.send("Error: " + response.statusCode + ": " + err);
+          }
+          else {
+              console.log(response.statusCode, body);
+              res.send(body);
+          }
       }
   );
-
-  app.get('/profile',
-    addon.authenticate(),
-    function (req, res) {
-      res.render('profile', {
-          profileKey: req.param('profileKey')
-      });
-    }
-  );
-
-  // Add any additional route handlers you need for views or REST resources here...
-  app.get('/search-view',
-    addon.authenticate(),
-    function (req, res) {
-      res.render('search-view', {
-
-      });
-    }
-  );
+  });
 };

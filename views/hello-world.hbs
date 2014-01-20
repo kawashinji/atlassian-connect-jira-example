@@ -20,13 +20,44 @@
             client library.
           </p>
           <p>
-            <a class="aui-button aui-button-primary" href="https://bitbucket.org/atlassian/atlassian-connect-express/src/master/README.md#markdown-header-atlassian-connect-express-nodejs-package-for-express-based-atlassian-add-ons" target="_parent">
-              Get Started
-              <span class="aui-icon aui-icon-small aui-iconfont-devtools-arrow-right">Arrow right</span>
+            <a id="get-license-button" class="aui-button aui-button-primary" href="#" target="_parent">
+              Get License Data
+              <span class="aui-icon aui-icon-small aui-iconfont-devtools-arrow-right"></span>
             </a>
+          </p>
+
+          <p class="license-data hidden">
+            <code>
+            </code>
           </p>
         </div>
       </div>
     </section>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    function setLicenseData(content) {
+      $(".license-data code")
+          .empty()
+          .text(content)
+          .parent()
+            .removeClass("hidden");
+    }
+
+    $("#get-license-button").click(function (e) {
+      $.ajax("/license", {
+        "error": function (xhr, textStatus, errorThrown) {
+            console.log(arguments);
+            setLicenseData("Could not retrieve license data: " + textStatus + " – " + errorThrown);
+        },
+        "success": function (data) {
+            setLicenseData(data);
+        }
+      });
+      e.preventDefault();
+      return false;
+    });
+  })
+</script>
