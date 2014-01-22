@@ -18,45 +18,51 @@
         "webItems": [
             {
                 "name": {
-                    "value": "Remote web item"
+                    "value": "My dropdown"
                 },
-                "context": "addon",
                 "location": "system.top.navigation.bar",
                 "url": "/hello-world",
                 "tooltip": {
                     "value": "My JIRA Connect Add-on",
                     "i18n": "foo.bar"
-                }
+                },
+                "key": "my-dropdown"
             },
             {
-                "name": {
-                    "value": "Dialog web item"
-                },
-                "context": "addon",
-                "location": "system.top.navigation.bar",
+                "name": { "value": "A: First item" },
                 "url": "/hello-world",
-                "target": {
-                    "type": "dialog"
-                },
-                "tooltip": {
-                    "value": "Web item that loads a dialog",
-                    "i18n": "foo.bar"
-                }
+                "location": "my-dropdown/dropdown-section-1",
+                "weight": 1
             },
             {
-                "name": {
-                    "value": "Inline Dialog web item"
-                },
-                "context": "addon",
-                "location": "system.top.navigation.bar",
+                "name": { "value": "A: Second item" },
                 "url": "/hello-world",
-                "target": {
-                    "type": "inlinedialog"
-                },
-                "tooltip": {
-                    "value": "Web item that loads an inline dialog",
-                    "i18n": "foo.bar"
-                }
+                "location": "my-dropdown/dropdown-section-1",
+                "weight": 2
+            },
+            {
+                "name": { "value": "B: First item" },
+                "url": "/hello-world",
+                "location": "my-dropdown/dropdown-section-2",
+                "weight": 1
+            },
+            {
+                "name": { "value": "B: Second item" },
+                "url": "/hello-world",
+                "location": "my-dropdown/dropdown-section-2",
+                "weight": 2
+            }
+        ],
+        "webSections": [
+            {
+                "name": { "value": "Section A" },
+                "location": "my-dropdown",
+                "key": "dropdown-section-1"
+            },
+            {
+                "name": { "value": "Section B" },
+                "location": "my-dropdown",
+                "key": "dropdown-section-2"
             }
         ],
         "webPanels": [
