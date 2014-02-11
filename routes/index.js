@@ -26,8 +26,6 @@ module.exports = function(app, addon) {
   });
 
   app.get('/conditions/hello-world', addon.authenticate(), function(req, res) {
-    //console.log(req);
-    //console.log("HEADERS", req.headers);
     res.render('conditions/hello-world', {
       shouldDisplay: true
     });
@@ -39,9 +37,18 @@ module.exports = function(app, addon) {
     });
   });
 
-  app.get('/search-view', addon.authenticate(), function(req, res) {
+  app.get('/search-view', /*addon.authenticate(),*/ function(req, res) {
     res.render('search-view', {
-
+      userKey: req.param('user_key'),
+      userName: req.param('user_id'),
+      lic: req.param('lic'),
+      loc: req.param('loc'),
+      tz: req.param('tz'),
+      link: req.param('link'),
+      startIssue: req.param('startIssue'),
+      endIssue: req.param('endIssue'),
+      totalIssues: req.param('totalIssues'),
+      issues: req.param('issues')
     });
   });
 
