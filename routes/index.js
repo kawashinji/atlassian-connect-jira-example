@@ -33,9 +33,10 @@ module.exports = function(app, addon) {
     });
   });
 
-  app.get('/profile', addon.authenticate(), function(req, res) {
-    res.render('profile', {
-      profileKey: req.param('profileKey')
+  app.get('/profile-tab', addon.authenticate(), function(req, res) {
+    res.render('profile-tab', {
+      userKey: req.param('profileUserKey'),
+      userName: req.param('profileUserName')
     });
   });
 
@@ -44,6 +45,13 @@ module.exports = function(app, addon) {
 
     });
   });
+
+  app.get('/profile-tab', addon.authenticate(), function(req, res) {
+    res.render('profile-tab', {
+      title: 'Atlassian Connect'
+    });
+  });
+
 
   app.get('/license', function(req, res) {
       var httpClient = addon.httpClient({
