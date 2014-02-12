@@ -122,6 +122,19 @@
                    "value": "Add-on Profile Tab"
                 }
             }
+        ],
+        "jiraSearchRequestViews": [
+            {
+              "url": "/search-view",
+              "weight": 100,
+              "description": {
+                  "value": "Example search request view"
+              },
+              "name": {
+                  "value": "My Search View",
+                  "i18n": "my.search.view"
+              }
+            }
         ]
     }
 }
