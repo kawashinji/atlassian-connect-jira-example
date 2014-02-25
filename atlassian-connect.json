@@ -22,6 +22,7 @@
                 },
                 "location": "system.top.navigation.bar",
                 "url": "/hello-world",
+                "key": "dropdown",
                 "tooltip": {
                     "value": "My JIRA Connect Add-on",
                     "i18n": "foo.bar"
@@ -31,24 +32,28 @@
             {
                 "name": { "value": "A: First item" },
                 "url": "/hello-world",
+                "key": "dropdown-1-1",
                 "location": "my-dropdown/dropdown-section-1",
                 "weight": 1
             },
             {
                 "name": { "value": "A: Second item" },
                 "url": "/hello-world",
+                "key": "dropdown-1-2",
                 "location": "my-dropdown/dropdown-section-1",
                 "weight": 2
             },
             {
                 "name": { "value": "B: First item" },
                 "url": "/hello-world",
+                "key": "dropdown-2-1",
                 "location": "my-dropdown/dropdown-section-2",
                 "weight": 1
             },
             {
                 "name": { "value": "B: Second item" },
                 "url": "/hello-world",
+                "key": "dropdown-2-2",
                 "location": "my-dropdown/dropdown-section-2",
                 "weight": 2
             }
@@ -71,6 +76,7 @@
                     "value": "Project Banner"
                 },
                 "location": "atl.jira.view.issue.right.context",
+                "key": "issue-panel-1",
                 "url": "/hello-world"
             }
         ],
@@ -80,10 +86,11 @@
                 "name": {
                     "value": "Hello World Webitem"
                 },
+                "key": "hello-world",
                 "url": "/hello-world",
                 "conditions": [
                     {
-                        "condition": "/conditions/hello-world"
+                        "condition": "user_is_logged_in"
                     }
                 ]
             }
@@ -93,13 +100,15 @@
                 "name": {
                     "value": "Config Admin Page"
                 },
-                "url": "/hello-world"
+                "url": "/hello-world",
+                "key": "admin"
             }
         ],
         "configurePage": {
             "name": { 
                 "value": "Add-on Configuration"
             },
+            "key": "configure",
             "url": "/configure",
             "location": "system.admin/globalsettings"
         },
@@ -126,6 +135,7 @@
         "jiraSearchRequestViews": [
             {
               "url": "/search-view",
+              "key": "search-view",
               "weight": 100,
               "description": {
                   "value": "Example search request view"
