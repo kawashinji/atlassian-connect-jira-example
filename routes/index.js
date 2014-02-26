@@ -27,7 +27,7 @@ module.exports = function(app, addon) {
 
   app.get('/conditions/hello-world', addon.authenticate(), function(req, res) {
     res.render('conditions/hello-world', {
-      shouldDisplay: true
+      shouldDisplay: "true"
     });
   });
 
