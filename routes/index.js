@@ -53,13 +53,6 @@ module.exports = function(app, addon) {
     });
   });
 
-  app.get('/profile-tab', addon.authenticate(), function(req, res) {
-    res.render('profile-tab', {
-      title: 'Atlassian Connect'
-    });
-  });
-
-
   app.get('/license', function(req, res) {
       var httpClient = addon.httpClient({
           clientKey: 'jira:15489595',
