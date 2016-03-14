@@ -1,3 +1,5 @@
+var util = require('util');
+
 module.exports = function(app, addon) {
   
   app.get('/', function(req, res) {
@@ -16,6 +18,13 @@ module.exports = function(app, addon) {
   app.get('/hello-world', addon.authenticate(), function(req, res) {
     res.render('hello-world', {
       title: 'Atlassian Connect'
+    });
+  });
+
+  app.all('/condition', addon.authenticate(), function(req, res) {
+    console.log(req.get('Authorization'));
+    res.json({
+      shouldDisplay: true
     });
   });
 
@@ -51,6 +60,14 @@ module.exports = function(app, addon) {
       totalIssues: req.param('totalIssues'),
       issues: req.param('issues')
     });
+  });
+
+  app.post('/created', function(req, res) {
+      var issueKey = req.body.issue.key;
+      var summary  = req.body.issue.fields.summary;
+      var type     = req.body.issue.fields.issuetype.name;
+      console.log("Issue created", issueKey, summary, type);
+      res.send(200);
   });
 
   app.get('/license', function(req, res) {

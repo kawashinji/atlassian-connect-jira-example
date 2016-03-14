@@ -11,8 +11,13 @@
     "authentication": {
         "type": "jwt"
     },
+    "scopes": ["READ"],
     "lifecycle": {
         "installed": "/installed"
+    },
+    "links": {
+        "postInstallUrl": "/hello-world",
+        "postUpdateUrl": "/hello-world"
     },
     "modules": {
         "webItems": [
@@ -27,6 +32,9 @@
                     "value": "My JIRA Connect Add-on",
                     "i18n": "foo.bar"
                 },
+                "conditions": [{
+                    "condition": "/condition"
+                    }],
                 "key": "my-dropdown"
             },
             {
@@ -145,6 +153,19 @@
                   "i18n": "my.search.view"
               }
             }
-        ]
+        ],
+        "webhooks": [{
+            "event": "jira:issue_created",
+            "url": "/created?type=bug",
+            "params": {
+                "filter": "type = Bug"
+            }
+        },{
+            "event": "jira:issue_created",
+            "url": "/created",
+            "params": {
+                "filter": "asdfij13039"
+            }
+        }]
     }
 }
