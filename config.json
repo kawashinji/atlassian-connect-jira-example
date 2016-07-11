@@ -1,20 +1,13 @@
 {
-  // This is the add-on's basic information.  These values can be contributed to
-  // atlassian-plugin.xml via template replacement.
-  "key": "jira-connect-example",
-  "name": "Example Atlassian Connect JIRA Add-on",
-  "description": "Provides examples of how to use Atlassian Connect extension points in JIRA.",
-  "version": "1",
-  "vendorName": "Atlassian",
-  "vendorUrl": "http://www.atlassian.com",
-  "documentationUrl": "https://developer.atlassian.com/display/AC/",
-
   // This is the default environment. To change your app to use
   // a different env, set NODE_ENV (http://expressjs.com/api.html#app.configure)
   "development": {
 
     // This is the port your Express server will listen on
     "port": 3000,
+
+    //Use 'unauthorized.hbs' template for displaying an error page
+    "errorTemplate": true,
 
     // alassian-connect-express currently integrates with JugglingDB for persistence
     // to store the host client information (i.e., client key, host public
@@ -50,16 +43,11 @@
     //     "type": "postgres",
     //     "url": "postgres://localhost/my_addon_database"
     //   },
-
-    // Your add-on will be registered with the following hosts upon startup.
-    // In order to take advantage of the automatic registration/deregistration,
-    // you need to make sure that your express app calls `addon.register()`
-    // (see app.js). Also, you don't need to specify the user/pwd in the URL
-    // as in the examples below. If you don't provide a user/pwd, you will be
-    // prompted the first time you start the server.
-    "hosts": [
-      "http://admin:admin@localhost:2990/jira"
-    ]
+    "store": {
+      "adapter": "jugglingdb",
+      "type": "sqlite3",
+      "database": "store.db"
+    }
   },
 
   // This is the production add-on configuration, which is enabled by setting
@@ -69,6 +57,10 @@
     // HTTP port to you via the PORT environement variable, so we configure
     // that to be honored here.
     "port": "$PORT",
+
+    //Use 'unauthorized.hbs' template for displaying an error page
+    "errorTemplate": true,
+
     // This is the public URL to your production add-on.
     "localBaseUrl": "https://your-subdomain.herokuapp.com",
     "store": {
@@ -85,7 +77,9 @@
     // Make sure that your add-on can only be registered by the hosts on
     // these domains.
     "whitelist": [
+      "*.jira-dev.com",
       "*.atlassian.net",
+      "*.atlassian.com",
       "*.jira.com"
     ]
   }

@@ -20,13 +20,13 @@
             client library.
           </p>
           <p>
-            <a id="get-license-button" class="aui-button aui-button-primary" href="#" target="_parent">
-              Get License Data
+            <a id="get-addon-button" class="aui-button aui-button-primary" href="#" target="_parent">
+              Get Add-on Install Data
               <span class="aui-icon aui-icon-small aui-iconfont-devtools-arrow-right"></span>
             </a>
           </p>
 
-          <p class="license-data hidden">
+          <p class="addon-data hidden">
             <code>
             </code>
           </p>
@@ -38,22 +38,22 @@
 
 <script>
   $(document).ready(function () {
-    function setLicenseData(content) {
-      $(".license-data code")
+    function setAddonData(content) {
+      $(".addon-data code")
           .empty()
           .text(content)
           .parent()
             .removeClass("hidden");
     }
 
-    $("#get-license-button").click(function (e) {
-      $.ajax("/license", {
+    $("#get-addon-button").click(function (e) {
+      $.ajax("/addonData?jwt={{token}}", {
         "error": function (xhr, textStatus, errorThrown) {
             console.log(arguments);
-            setLicenseData("Could not retrieve license data: " + textStatus + " – " + errorThrown);
+            setAddonData("Could not retrieve addon data: " + textStatus + " – " + errorThrown);
         },
         "success": function (data) {
-            setLicenseData(data);
+            setAddonData(data);
         }
       });
       e.preventDefault();

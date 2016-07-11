@@ -70,19 +70,15 @@ module.exports = function(app, addon) {
       res.send(200);
   });
 
-  app.get('/license', function(req, res) {
-      var httpClient = addon.httpClient({
-          clientKey: 'jira:15489595',
-          userId: "admin",
-          appKey: addon.key
-      });
+  app.get('/addonData', addon.checkValidToken(), function(req, res) {
+      var httpClient = addon.httpClient(req);
 
       httpClient.get({
           "headers": {
               "Content-Type": "application/json",
               "Accept": "application/json"
           },
-          "url": "/rest/atlassian-connect/latest/license"
+          "url": "/rest/atlassian-connect/latest/addons/" + addon.key
       },
       function(err, response, body) {
           if (err) { 
