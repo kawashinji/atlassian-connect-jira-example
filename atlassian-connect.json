@@ -32,9 +32,6 @@
                     "value": "My JIRA Connect Add-on",
                     "i18n": "foo.bar"
                 },
-                "conditions": [{
-                    "condition": "/condition"
-                    }],
                 "key": "my-dropdown"
             },
             {
