@@ -7,7 +7,6 @@ Congratulations! You've successfully created an Atlassian Connect Add-on using t
 * Auto registration and deregistration of your add-on in development mode
 * Persistent storage of the host client information (i.e., client key, shared secret and other useful host information)
 * Persistent add-on data storage through a key/value store
-* Dynamic re-registration of your add-on when the atlassian-plugin.xml is modified
 
 ## What's next?
 
